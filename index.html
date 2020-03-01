@@ -39,7 +39,7 @@ Date: 01/03/2020
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="decrementIphone" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
+                           <input id="totalIphone" type="text" class="form-control text-center" value="1">
                            <button id="incrementIphone" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$ <span id="iphonePrice">1219</span></h5>
@@ -57,7 +57,7 @@ Date: 01/03/2020
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="decrementCase" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
+                           <input id="totalIphoneCase" type="text" class="form-control text-center" value="1">
                            <button id="incrementCase" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
@@ -97,26 +97,56 @@ Date: 01/03/2020
       // Iphone increment (plus icon)
       const incrementIphoneBtn = document.getElementById("incrementIphone");
       incrementIphoneBtn.addEventListener("click", function () {
-         console.log("clicked");
+         itemIncrementDecrement("totalIphone", "iphonePrice", "plus");
       });
 
       // Iphone decrement (minus icon)
       const decrementIphoneBtn = document.getElementById("decrementIphone");
       decrementIphoneBtn.addEventListener("click", function () {
-         console.log("clicked");
+         itemIncrementDecrement("totalIphone", "iphonePrice", "minus");
       });
 
       // Iphone-case increment (plus icon)
       const incrementCaseBtn = document.getElementById("incrementCase");
       incrementCaseBtn.addEventListener("click", function () {
-         console.log("clicked");
+         itemIncrementDecrement("totalIphoneCase", "iphoneCasePrice", "plus");
       });
 
       // Iphone-case decrement (minus icon)
       const decrementCaseBtn = document.getElementById("decrementCase");
       decrementCaseBtn.addEventListener("click", function () {
-         console.log("clicked");
+         itemIncrementDecrement("totalIphoneCase", "iphoneCasePrice", "minus");
       });
+
+
+
+      //  Function (Increment - Decrement)
+      function itemIncrementDecrement(totalItemQuantity, totalItemPrice, type) {
+         const totalItem = document.getElementById(totalItemQuantity).value;
+
+         if (type == "plus") {
+            newTotalItem = parseFloat(totalItem) + 1;
+         } else {
+            newTotalItem = parseFloat(totalItem) - 1;
+         }
+
+         const totalPrice = document.getElementById(totalItemPrice).innerText;
+         const totalAmount = parseFloat(totalPrice);
+
+         const regularPrice = totalAmount / totalItem;
+
+         if (newTotalItem <= 1) {
+            document.getElementById(totalItemQuantity).value = 1;
+            document.getElementById(totalItemPrice).innerText = regularPrice;
+         } else {
+            document.getElementById(totalItemQuantity).value = newTotalItem;
+            const setNewPrice = regularPrice * newTotalItem;
+            document.getElementById(totalItemPrice).innerText = setNewPrice;
+         }
+
+         addTotal();
+      }
+
 
 
       // Remove Iphone (Cross img)
