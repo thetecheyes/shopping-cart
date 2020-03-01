@@ -42,7 +42,7 @@ Date: 01/03/2020
                            <input id="totalIphone" type="text" class="form-control text-center" value="1">
                            <button id="incrementIphone" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="iphonePrice">1219</span></h5>
+                        <h5>$ <span id="iphonePrice">1399</span></h5>
                         <img id="removeIphone" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -72,14 +72,14 @@ Date: 01/03/2020
 
                      <div class="col-md-8">
                         <h5>Subtotal: </h5>
-                        <h5>Tax:</h5>
+                        <h5>4% Tax:</h5>
                         <h5>Total:</h5>
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="subTotal"></span></h5>
+                        <h5>$ <span id="tax"></span></h5>
+                        <h5>$ <span id="total"></span></h5>
                      </div>
                   </div>
                </div>
@@ -144,8 +144,23 @@ Date: 01/03/2020
             document.getElementById(totalItemPrice).innerText = setNewPrice;
          }
 
-         addTotal();
+         finalPriceUpdate();
       }
+
+      // SubTotal, 4% Tax, Total Update
+      function finalPriceUpdate() {
+         const iphonePrice = document.getElementById("iphonePrice").innerText;
+         const iphoneCasePrice = document.getElementById("iphoneCasePrice").innerText;
+         const subTotalAmount = parseFloat(iphonePrice) + parseFloat(iphoneCasePrice);
+         document.getElementById('subTotal').innerText = subTotalAmount;
+
+         // Tax
+         const tax = subTotalAmount * 4 / 100;
+         document.getElementById('tax').innerText = tax;
+         document.getElementById('total').innerText = subTotalAmount + tax;
+      }
+
+      finalPriceUpdate();
 
 
 
@@ -160,8 +175,6 @@ Date: 01/03/2020
       removeCaseBtn.addEventListener("click", function () {
          console.log("clicked");
       });
-
-
 
    </script>
 
