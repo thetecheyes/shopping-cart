@@ -27,7 +27,7 @@ Date: 01/03/2020
 
    <section>
       <div class="container">
-         <div class="cart">
+         <div id="shoppingCart" class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
                <div class="cart-item" id="iphoneCart">
                   <div class="row">
@@ -84,10 +84,18 @@ Date: 01/03/2020
                   </div>
                </div>
                <div class="col-md-12 pt-4 pb-4">
-                  <button type="button" class="btn btn-success check-out">Check Out</button>
+                  <button id="checkoutBtn" type="button" class="btn btn-success check-out">Check Out</button>
                </div>
             </div>
          </div>
+
+         <!-- Welcome massage -->
+         <div id="welcomeMsg" class="cart text-center">
+            <div class="col-md-12">
+               <h2>We've received your order. Thanks for being with us.</h2>
+            </div>
+         </div>
+
       </div>
    </section>
 
@@ -119,6 +127,15 @@ Date: 01/03/2020
       });
 
 
+      // Welcome massage after checkout
+      const redCheckout = document.getElementById("checkoutBtn");
+      redCheckout.addEventListener("click", function () {
+         const shoppingCart = document.getElementById("shoppingCart");
+         shoppingCart.style.display = "none";
+         const welcomeMsg = document.getElementById("welcomeMsg");
+         welcomeMsg.style.display = "block";
+      });
+
 
       //  Function (Increment - Decrement)
       function itemIncrementDecrement(totalItemQuantity, totalItemPrice, type) {
@@ -132,7 +149,6 @@ Date: 01/03/2020
 
          const totalPrice = document.getElementById(totalItemPrice).innerText;
          const totalAmount = parseFloat(totalPrice);
-
          const regularPrice = totalAmount / totalItem;
 
          if (newTotalItem <= 1) {
@@ -158,11 +174,14 @@ Date: 01/03/2020
          const tax = subTotalAmount * 4 / 100;
          document.getElementById("tax").innerText = tax;
          document.getElementById("total").innerText = subTotalAmount + tax;
+
+         if (subTotalAmount == 0) {
+            checkoutBtn.style.backgroundColor = "red";
+            const redCheckout = document.getElementById("checkoutBtn").disabled = true;
+         }
       }
 
       finalPriceUpdate();
-
-
 
       // Remove Iphone (Cross img)
       const removeIphoneBtn = document.getElementById("removeIphone");
@@ -175,6 +194,7 @@ Date: 01/03/2020
       removeCaseBtn.addEventListener("click", function () {
          removeCartItem("iphoneCaseCart", "iphoneCasePrice");
       });
+
 
       // Function (Remove item from cart)
       function removeCartItem(cartItem, cartItemPrice) {

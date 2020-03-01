@@ -56,3 +56,9 @@ body{
 	background-color: #2FBE70;
 	border: none;
 }
+#welcomeMsg {
+	border-radius: 10px;
+	background-color: #2FBE70;
+	color: white;
+	display: none;
+}
