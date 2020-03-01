@@ -152,12 +152,12 @@ Date: 01/03/2020
          const iphonePrice = document.getElementById("iphonePrice").innerText;
          const iphoneCasePrice = document.getElementById("iphoneCasePrice").innerText;
          const subTotalAmount = parseFloat(iphonePrice) + parseFloat(iphoneCasePrice);
-         document.getElementById('subTotal').innerText = subTotalAmount;
+         document.getElementById("subTotal").innerText = subTotalAmount;
 
          // Tax
          const tax = subTotalAmount * 4 / 100;
-         document.getElementById('tax').innerText = tax;
-         document.getElementById('total').innerText = subTotalAmount + tax;
+         document.getElementById("tax").innerText = tax;
+         document.getElementById("total").innerText = subTotalAmount + tax;
       }
 
       finalPriceUpdate();
@@ -167,14 +167,22 @@ Date: 01/03/2020
       // Remove Iphone (Cross img)
       const removeIphoneBtn = document.getElementById("removeIphone");
       removeIphoneBtn.addEventListener("click", function () {
-         console.log("clicked");
+         removeCartItem("iphoneCart", "iphonePrice");
       });
 
       // Remove Iphone-case (Cross img)
       const removeCaseBtn = document.getElementById("removeCase");
       removeCaseBtn.addEventListener("click", function () {
-         console.log("clicked");
+         removeCartItem("iphoneCaseCart", "iphoneCasePrice");
       });
+
+      // Function (Remove item from cart)
+      function removeCartItem(cartItem, cartItemPrice) {
+         document.getElementById(cartItem).style.display = "none";
+         document.getElementById(cartItemPrice).innerText = 0;
+
+         finalPriceUpdate();
+      }
 
    </script>
 
